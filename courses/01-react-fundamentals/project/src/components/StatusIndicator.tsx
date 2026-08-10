@@ -1,7 +1,26 @@
+/**
+ * Displays a task status such as overdue, due today, due soon, or completed.
+ */
 interface StatusIndicatorProps {
-  status?: string
+  status: "overdue" | "due-today" | "due-soon" | "completed";
 }
 
-export default function StatusIndicator(_props: StatusIndicatorProps) {
-  return null
+export default function StatusIndicator({
+  status,
+}: StatusIndicatorProps) {
+  const labels = {
+    overdue: "Overdue",
+    "due-today": "Due Today",
+    "due-soon": "Due Soon",
+    completed: "Completed",
+  };
+
+  return (
+    <span
+      className="status-indicator"
+      data-status={status}
+    >
+      {labels[status]}
+    </span>
+  );
 }

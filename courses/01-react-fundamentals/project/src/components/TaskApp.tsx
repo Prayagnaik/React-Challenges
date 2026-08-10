@@ -1,8 +1,10 @@
-import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
+import { useState, useEffect, useMemo, type Dispatch, type SetStateAction } from "react";
 import type { Task } from "./TaskList";
 import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 import FilterBar from "./FilterBar";
+import StatsPanel from "./StatsPanel";
+
 
 interface TaskAppProps {
   tasks?: Task[];
@@ -18,8 +20,47 @@ interface TaskAppProps {
 
 export default function TaskApp(props: TaskAppProps) {
   const { tasks = [], setTasks, showForm } = props;
+  const stats = useMemo(() => {
+    const total = tasks.length;
+
+    const completed = tasks.filter(
+      (task) => task.completed,
+    ).length;
+
+    const active = tasks.filter(
+      (task) => !task.completed,
+    ).length;
+
+    const overdue = tasks.filter((task) => {
+      if (task.completed || !task.dueDate) {
+        return false;
+      }
+
+      const dueDate = new Date(task.dueDate);
+      const today = new Date();
+
+      dueDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+
+      return dueDate.getTime() < today.getTime();
+    }).length;
+
+    const completedPercentage =
+      total === 0
+        ? 0
+        : Math.round((completed / total) * 100);
+
+    return {
+      total,
+      completed,
+      completedPercentage,
+      active,
+      overdue,
+    };
+  }, [tasks]);
 
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
+  const [categoryFilter, setCategoryFilter] = useState("")
   const [sortOrder, setSortOrder] = useState("recent");
   const [editingId, setEditingId] = useState<string | number | null>(null);
   const [searchText, setSearchText] = useState("");
@@ -43,9 +84,9 @@ export default function TaskApp(props: TaskAppProps) {
       prev.map((task) =>
         task.id === id
           ? {
-              ...task,
-              completed: !task.completed,
-            }
+            ...task,
+            completed: !task.completed,
+          }
           : task,
       ),
     );
@@ -56,6 +97,13 @@ export default function TaskApp(props: TaskAppProps) {
       prev.map((task) => (task.id === id ? { ...task, ...updates } : task)),
     );
   };
+  const categories = [
+    ...new Set(
+      tasks
+        .map((task) => task.category)
+        .filter(Boolean),
+    ),
+  ];
 
   let filteredTasks =
     filter === "active"
@@ -63,6 +111,12 @@ export default function TaskApp(props: TaskAppProps) {
       : filter === "completed"
         ? tasks.filter((task) => task.completed)
         : tasks;
+
+  if (categoryFilter !== "") {
+    filteredTasks = filteredTasks.filter(
+      (task) => task.category === categoryFilter
+    );
+  }
 
   if (debouncedSearch.trim() !== "") {
     const search = debouncedSearch.toLowerCase();
@@ -102,6 +156,18 @@ export default function TaskApp(props: TaskAppProps) {
         }),
       );
       break;
+    case "due":
+      sortedTasks.sort((a, b) => {
+        if (!a.dueDate && !b.dueDate) return 0;
+        if (!a.dueDate) return 1;
+        if (!b.dueDate) return -1;
+
+        return (
+          new Date(a.dueDate).getTime() -
+          new Date(b.dueDate).getTime()
+        );
+      });
+      break;
 
     case "recent":
     default:
@@ -110,12 +176,24 @@ export default function TaskApp(props: TaskAppProps) {
 
   return (
     <>
-      {showForm && <TaskForm onAddTask={handleAddTask} />}
+      {showForm && <TaskForm onAddTask={handleAddTask} categories={categories} />}
+      {props.showStatsPanel && (
+        <StatsPanel
+          total={stats.total}
+          completed={stats.completed}
+          active={stats.active}
+          overdue={stats.overdue}
+          
+        />
+      )}
 
       {props.showFilterBar && (
         <FilterBar
           filter={filter}
           onFilterChange={setFilter}
+          categoryFilter={categoryFilter}
+          onCategoryChange={setCategoryFilter}
+          categories={categories}
           sortOrder={sortOrder}
           setSortOrder={setSortOrder}
           searchText={searchText}

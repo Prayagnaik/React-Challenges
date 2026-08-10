@@ -1,58 +1,125 @@
+import Button from "./Button";
+import FormInput from "./FormInput";
+
 interface FilterBarProps {
   filter: "all" | "active" | "completed";
+  categoryFilter: string;
+  categories: string[];
   sortOrder: string;
   searchText: string;
   setSortOrder: (sort: string) => void;
-  onFilterChange: (filter: "all" | "active" | "completed") => void;
+  onFilterChange: (
+    filter: "all" | "active" | "completed",
+  ) => void;
   setSearchText: (text: string) => void;
+  onCategoryChange: (category: string) => void;
 }
 
-export default function FilterBar(props: FilterBarProps) {
+export default function FilterBar({
+  filter,
+  categoryFilter,
+  categories,
+  sortOrder,
+  searchText,
+  setSortOrder,
+  onFilterChange,
+  setSearchText,
+  onCategoryChange,
+}: FilterBarProps) {
   return (
-    <div id="filter-bar">
-      <button
-        data-active={props.filter === "all"}
-        onClick={() => props.onFilterChange("all")}
+    <div>
+      <Button
+        variant={filter === "all" ? "primary" : "secondary"}
+        onClick={() => onFilterChange("all")}
       >
         All
-      </button>
+      </Button>
 
-      <button
-        data-active={props.filter === "active"}
-        onClick={() => props.onFilterChange("active")}
+      <Button
+        variant={
+          filter === "active"
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => onFilterChange("active")}
       >
         Active
-      </button>
+      </Button>
 
-      <button
-        data-active={props.filter === "completed"}
-        onClick={() => props.onFilterChange("completed")}
+      <Button
+        variant={
+          filter === "completed"
+            ? "primary"
+            : "secondary"
+        }
+        onClick={() => onFilterChange("completed")}
       >
         Completed
-      </button>
+      </Button>
 
-      <input
+      <select
+        id="category-filter"
+        value={categoryFilter}
+        onChange={(e) =>
+          onCategoryChange(e.target.value)
+        }
+      >
+        <option value="">All Categories</option>
+
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+
+      <FormInput
+        id="task-search"
+        label=""
         type="text"
         placeholder="Search tasks..."
-        value={props.searchText}
-        onChange={(e) => props.setSearchText(e.target.value)}
+        value={searchText}
+        onChange={(e) =>
+          setSearchText(e.target.value)
+        }
       />
 
-      {props.searchText && (
-        <button id="clear-search" onClick={() => props.setSearchText("")}>
+      {searchText && (
+        <Button
+          id="clear-search"
+          variant="secondary"
+          onClick={() => setSearchText("")}
+        >
           Clear search
-        </button>
+        </Button>
       )}
 
       <select
         id="sort-order"
-        value={props.sortOrder}
-        onChange={(e) => props.setSortOrder(e.target.value)}
+        value={sortOrder}
+        onChange={(e) =>
+          setSortOrder(e.target.value)
+        }
       >
-        <option value="recent">Recently Added</option>
-        <option value="high">Priority High to Low</option>
-        <option value="low">Priority Low to High</option>
-        <option value="alpha">Alphabetical</option>
+        <option value="recent">
+          Recently Added
+        </option>
+
+        <option value="high">
+          Priority High to Low
+        </option>
+
+        <option value="low">
+          Priority Low to High
+        </option>
+
+        <option value="alpha">
+          Alphabetical
+        </option>
+
+        <option value="due">
+          Due Date (Soonest First)
+        </option>
       </select>
     </div>
   );

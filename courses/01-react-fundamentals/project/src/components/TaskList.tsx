@@ -10,8 +10,8 @@ export interface Task {
   description: string;
   priority: "Low" | "Medium" | "High";
   completed: boolean;
-  category?: string;
-  tags?: string[];
+  category: string;
+  tags: string[];
   dueDate?: string | number;
 }
 
@@ -42,6 +42,8 @@ const HardCodedTasks: Task[] = [
     description: "First hardcoded task",
     priority: "High",
     completed: false,
+    category: "General",
+    tags: [],
   },
   {
     id: 2,
@@ -49,6 +51,8 @@ const HardCodedTasks: Task[] = [
     description: "Second hardcoded task",
     priority: "Medium",
     completed: false,
+    category: "General",
+    tags: [],
   },
   {
     id: 3,
@@ -56,6 +60,8 @@ const HardCodedTasks: Task[] = [
     description: "Third hardcoded task",
     priority: "Low",
     completed: true,
+    category: "General",
+    tags: [],
   },
 ];
 
@@ -77,12 +83,15 @@ export default function TaskList(props: TaskListProps) {
             title={task.title}
             description={task.description}
             priority={task.priority}
+            category={task.category}
+            tags={task.tags}
             completed={task.completed}
             onToggle={props.onToggle}
             onDelete={props.onDelete}
             onUpdateTask={props.onUpdateTask}
             editingId={props.editingId}
             setEditingId={props.setEditingId}
+            dueDate={task.dueDate}
           />
         ))}
       </section>

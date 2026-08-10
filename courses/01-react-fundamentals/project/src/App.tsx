@@ -1,5 +1,5 @@
 import './App.css'
-import {useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import ChallengeList from './components/ChallengeList'
 import TaskList from './components/TaskList'
@@ -10,35 +10,47 @@ import { ThemeProvider } from './contexts/ThemeContext'
 import type { Task } from './components/TaskList'
 
 const INITIAL_TASKS: Task[] = [
-  { id: 1, title: 'First Task', description: 'Description one', priority: 'High', completed: false },
-  { id: 2, title: 'Second Task', description: 'Description two', priority: 'Medium', completed: false },
-  { id: 3, title: 'Third Task', description: 'Description three', priority: 'Low', completed: false },
-  { id: 4, title: 'Fourth Task', description: 'Description four', priority: 'Medium', completed: false },
-  { id: 5, title: 'Fifth Task', description: 'Description five', priority: 'High', completed: false },
+  { id: 1, title: 'First Task', description: 'Description one', priority: 'High', completed: false, category: "General", tags: [] },
+  { id: 2, title: 'Second Task', description: 'Description two', priority: 'Medium', completed: false, category: "General", tags: [] },
+  { id: 3, title: 'Third Task', description: 'Description three', priority: 'Low', completed: false, category: "General", tags: [] },
+  { id: 4, title: 'Fourth Task', description: 'Description four', priority: 'Medium', completed: false, category: "General", tags: [] },
+  { id: 5, title: 'Fifth Task', description: 'Description five', priority: 'High', completed: false, category: "General", tags: [] },
 ]
 
 function AppContent() {
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS)
 
-  useEffect(()=>{
-    const savedTasks=localStorage.getItem("task-app-tasks");
+  useEffect(() => {
+    const savedTasks = localStorage.getItem("task-app-tasks");
 
-    if(!savedTasks) return;
+    if (!savedTasks) return;
 
-    try{
-      const parsedTasks =JSON.parse(savedTasks) as Task[];
-      setTasks(parsedTasks);
-    }catch {
+    try {
+      const parsedTasks = JSON.parse(savedTasks) as Partial<Task>[];
+
+      const normalizedTasks: Task[] = parsedTasks.map((task) => ({
+        id: task.id!,
+        title: task.title ?? "",
+        description: task.description ?? "",
+        priority: task.priority ?? "Low",
+        completed: task.completed ?? false,
+        category: task.category ?? "General",
+        tags: Array.isArray(task.tags) ? task.tags : [],
+        dueDate: task.dueDate,
+      }));
+
+      setTasks(normalizedTasks);
+    } catch {
       alert("invalid data");
     }
-  },[]);
+  }, []);
 
-  useEffect(() =>{
+  useEffect(() => {
     localStorage.setItem(
       "task-app-tasks",
       JSON.stringify(tasks)
     );
-  
+
   })
   const handleDelete = (id: string | number) => {
     if (window.confirm('Are you sure?')) {
@@ -63,9 +75,31 @@ function AppContent() {
             <Route path="/challenge/09-search-functionality" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" showFilterBar />} />
             <Route path="/challenge/10-useeffect-local-storage" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" />} />
             <Route path="/challenge/11-useeffect-debounced-search" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" showFilterBar />} />
-            <Route path="/challenge/12-categories-and-tags" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" showFilterBar />} />
-            <Route path="/challenge/13-due-dates-and-sorting" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" showFilterBar />} />
-            <Route path="/challenge/14-task-statistics-dashboard" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" showStatsPanel />} />
+            <Route path="/challenge/12-categories-and-tags" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm showFilterBar countFormat="tasks" onDelete={handleDelete} />} />
+            <Route
+              path="/challenge/13-due-dates-and-sorting"
+              element={
+                <TaskApp
+                  tasks={tasks}
+                  setTasks={setTasks}
+                  showForm
+                  showFilterBar
+                  countFormat="tasks"
+                  onDelete={handleDelete} />} />
+            <Route
+              path="/challenge/14-task-statistics-dashboard"
+              element={
+                <TaskApp
+                  tasks={tasks}
+                  setTasks={setTasks}
+                  showForm
+                  showFilterBar
+                  showStatsPanel
+                  countFormat="tasks"
+                  onDelete={handleDelete}
+                />
+              }
+            />
             <Route path="/challenge/15-component-organization" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" />} />
             <Route path="/challenge/16-context-api-theme" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" />} />
             <Route path="/challenge/17-custom-hook-uselocalstorage" element={<TaskApp tasks={tasks} setTasks={setTasks} showForm countFormat="tasks" />} />
