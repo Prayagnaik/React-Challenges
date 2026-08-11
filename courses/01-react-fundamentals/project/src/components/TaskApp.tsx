@@ -4,6 +4,7 @@ import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 import FilterBar from "./FilterBar";
 import StatsPanel from "./StatsPanel";
+import { useTheme } from "../contexts/ThemeContext";
 
 
 interface TaskAppProps {
@@ -19,9 +20,11 @@ interface TaskAppProps {
 }
 
 export default function TaskApp(props: TaskAppProps) {
+  const { theme, toggleTheme } = useTheme();
   const { tasks = [], setTasks, showForm } = props;
   const stats = useMemo(() => {
     const total = tasks.length;
+
 
     const completed = tasks.filter(
       (task) => task.completed,
@@ -176,52 +179,61 @@ export default function TaskApp(props: TaskAppProps) {
 
   return (
     <>
-      {showForm && <TaskForm onAddTask={handleAddTask} categories={categories} />}
-      {props.showStatsPanel && (
-        <StatsPanel
-          total={stats.total}
-          completed={stats.completed}
-          active={stats.active}
-          overdue={stats.overdue}
-          
-        />
-      )}
+      <div data-theme={theme}>
+        <button
+          id="theme-toggle"
+          type="button"
+          onClick={toggleTheme}
+        >
+          {theme === "light" ? "Dark Mode" : "Light Mode"}
+        </button>
+        {showForm && <TaskForm onAddTask={handleAddTask} categories={categories} />}
+        {props.showStatsPanel && (
+          <StatsPanel
+            total={stats.total}
+            completed={stats.completed}
+            active={stats.active}
+            overdue={stats.overdue}
 
-      {props.showFilterBar && (
-        <FilterBar
-          filter={filter}
-          onFilterChange={setFilter}
-          categoryFilter={categoryFilter}
-          onCategoryChange={setCategoryFilter}
-          categories={categories}
-          sortOrder={sortOrder}
-          setSortOrder={setSortOrder}
-          searchText={searchText}
-          setSearchText={setSearchText}
-        />
-      )}
+          />
+        )}
 
-      {isSearching && searchText !== debouncedSearch && (
-        <p id="searching-indicator">Searching...</p>
-      )}
+        {props.showFilterBar && (
+          <FilterBar
+            filter={filter}
+            onFilterChange={setFilter}
+            categoryFilter={categoryFilter}
+            onCategoryChange={setCategoryFilter}
+            categories={categories}
+            sortOrder={sortOrder}
+            setSortOrder={setSortOrder}
+            searchText={searchText}
+            setSearchText={setSearchText}
+          />
+        )}
 
-      {sortedTasks.length === 0 ? (
-        <p id="filter-empty-message">No tasks found</p>
-      ) : (
-        <TaskList
-          tasks={sortedTasks}
-          onToggle={handleToggle}
-          onDelete={props.onDelete}
-          countText={
-            props.countFormat === "tasks"
-              ? `${tasks.length} Tasks`
-              : `${tasks.filter((t) => t.completed).length} Completed`
-          }
-          onUpdateTask={handleUpdateTask}
-          editingId={editingId}
-          setEditingId={setEditingId}
-        />
-      )}
+        {isSearching && searchText !== debouncedSearch && (
+          <p id="searching-indicator">Searching...</p>
+        )}
+
+        {sortedTasks.length === 0 ? (
+          <p id="filter-empty-message">No tasks found</p>
+        ) : (
+          <TaskList
+            tasks={sortedTasks}
+            onToggle={handleToggle}
+            onDelete={props.onDelete}
+            countText={
+              props.countFormat === "tasks"
+                ? `${tasks.length} Tasks`
+                : `${tasks.filter((t) => t.completed).length} Completed`
+            }
+            onUpdateTask={handleUpdateTask}
+            editingId={editingId}
+            setEditingId={setEditingId}
+          />
+        )}
+      </div>
     </>
   );
 }
