@@ -1,16 +1,21 @@
-import { useState, useEffect, useMemo, type Dispatch, type SetStateAction } from "react";
+import { useState, useEffect, useMemo, type Dispatch } from "react";
 import type { Task } from "./TaskList";
 import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
 import FilterBar from "./FilterBar";
 import StatsPanel from "./StatsPanel";
 import { useTheme } from "../contexts/ThemeContext";
+import {
+  ADD_TASK,
+  UPDATE_TASK,
+  TOGGLE_TASK,
+  type TaskAction,
+} from "../reducers/taskReducer";
 
 
 interface TaskAppProps {
   tasks?: Task[];
-  setTasks?: Dispatch<SetStateAction<Task[]>>;
-  dispatch?: (action: { type: string; payload?: unknown }) => void;
+  dispatch?: Dispatch<TaskAction>;
   showForm?: boolean;
   countFormat?: string;
   showFilterBar?: boolean;
@@ -21,7 +26,7 @@ interface TaskAppProps {
 
 export default function TaskApp(props: TaskAppProps) {
   const { theme, toggleTheme } = useTheme();
-  const { tasks = [], setTasks, showForm } = props;
+  const { tasks = [], dispatch, showForm } = props;
   const stats = useMemo(() => {
     const total = tasks.length;
 
@@ -79,27 +84,31 @@ export default function TaskApp(props: TaskAppProps) {
     return () => clearTimeout(timer);
   }, [searchText]);
   const handleAddTask = (task: Task) => {
-    setTasks?.((prev) => [...prev, task]);
+    dispatch?.({
+      type: ADD_TASK,
+      payload: task,
+    });
   };
 
   const handleToggle = (id: string | number) => {
-    setTasks?.((prev) =>
-      prev.map((task) =>
-        task.id === id
-          ? {
-            ...task,
-            completed: !task.completed,
-          }
-          : task,
-      ),
-    );
+    dispatch?.({
+      type: TOGGLE_TASK,
+      payload: id,
+    });
+  };
+  const handleUpdateTask = (
+    id: string | number,
+    updates: Partial<Task>
+  ) => {
+    dispatch?.({
+      type: UPDATE_TASK,
+      payload: {
+        id,
+        ...updates,
+      },
+    });
   };
 
-  const handleUpdateTask = (id: string | number, updates: Partial<Task>) => {
-    setTasks?.((prev) =>
-      prev.map((task) => (task.id === id ? { ...task, ...updates } : task)),
-    );
-  };
   const categories = [
     ...new Set(
       tasks
