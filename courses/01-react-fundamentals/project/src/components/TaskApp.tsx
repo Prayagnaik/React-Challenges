@@ -11,7 +11,7 @@ import {
   TOGGLE_TASK,
   type TaskAction,
 } from "../reducers/taskReducer";
-
+import ErrorBoundary from "./ErrorBoundary";
 
 interface TaskAppProps {
   tasks?: Task[];
@@ -258,19 +258,21 @@ export default function TaskApp(props: TaskAppProps) {
         {sortedTasks.length === 0 ? (
           <p id="filter-empty-message">No tasks found</p>
         ) : (
-          <TaskList
-            tasks={sortedTasks}
-            onToggle={handleToggle}
-            onDelete={props.onDelete}
-            countText={
-              props.countFormat === "tasks"
-                ? `${tasks.length} Tasks`
-                : `${tasks.filter((t) => t.completed).length} Completed`
-            }
-            onUpdateTask={handleUpdateTask}
-            editingId={editingId}
-            setEditingId={setEditingId}
-          />
+          <ErrorBoundary>
+            <TaskList
+              tasks={sortedTasks}
+              onToggle={handleToggle}
+              onDelete={props.onDelete}
+              countText={
+                props.countFormat === "tasks"
+                  ? `${tasks.length} Tasks`
+                  : `${tasks.filter((t) => t.completed).length} Completed`
+              }
+              onUpdateTask={handleUpdateTask}
+              editingId={editingId}
+              setEditingId={setEditingId}
+            />
+          </ErrorBoundary>
         )}
       </div>
     </>
