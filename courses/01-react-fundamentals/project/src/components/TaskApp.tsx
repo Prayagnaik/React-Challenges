@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, type Dispatch } from "react";
+import { useState, useEffect, useMemo, type Dispatch, useCallback } from "react";
 import type { Task } from "./TaskList";
 import TaskList from "./TaskList";
 import TaskForm from "./TaskForm";
@@ -27,16 +27,15 @@ interface TaskAppProps {
 export default function TaskApp(props: TaskAppProps) {
   const { theme, toggleTheme } = useTheme();
   const { tasks = [], dispatch, showForm } = props;
-  const stats = useMemo(() => {
+  function calculateTaskStats(tasks: Task[]) {
     const total = tasks.length;
 
-
     const completed = tasks.filter(
-      (task) => task.completed,
+      (task) => task.completed
     ).length;
 
     const active = tasks.filter(
-      (task) => !task.completed,
+      (task) => !task.completed
     ).length;
 
     const overdue = tasks.filter((task) => {
@@ -65,8 +64,11 @@ export default function TaskApp(props: TaskAppProps) {
       active,
       overdue,
     };
-  }, [tasks]);
-
+  }
+  const stats = useMemo(
+    () => calculateTaskStats(tasks),
+    [tasks]
+  );
   const [filter, setFilter] = useState<"all" | "active" | "completed">("all");
   const [categoryFilter, setCategoryFilter] = useState("")
   const [sortOrder, setSortOrder] = useState("recent");
@@ -83,20 +85,21 @@ export default function TaskApp(props: TaskAppProps) {
     }, 300);
     return () => clearTimeout(timer);
   }, [searchText]);
-  const handleAddTask = (task: Task) => {
+  const handleAddTask = useCallback((task: Task) => {
     dispatch?.({
       type: ADD_TASK,
       payload: task,
     });
-  };
+  }, [dispatch]);
 
-  const handleToggle = (id: string | number) => {
+  const handleToggle = useCallback((id: string | number) => {
     dispatch?.({
       type: TOGGLE_TASK,
       payload: id,
     });
-  };
-  const handleUpdateTask = (
+  }, [dispatch]);
+
+  const handleUpdateTask = useCallback((
     id: string | number,
     updates: Partial<Task>
   ) => {
@@ -107,84 +110,111 @@ export default function TaskApp(props: TaskAppProps) {
         ...updates,
       },
     });
-  };
+  }, [dispatch]);
 
-  const categories = [
+  const categories = useMemo(() => [
     ...new Set(
       tasks
         .map((task) => task.category)
         .filter(Boolean),
     ),
-  ];
+  ], [tasks]);
+  function filterAndSortTasks(
+    tasks: Task[],
+    filter: "all" | "active" | "completed",
+    categoryFilter: string,
+    searchText: string,
+    sortOrder: string
+  ): Task[] {
+    let result =
+      filter === "active"
+        ? tasks.filter((task) => !task.completed)
+        : filter === "completed"
+          ? tasks.filter((task) => task.completed)
+          : tasks;
 
-  let filteredTasks =
-    filter === "active"
-      ? tasks.filter((task) => !task.completed)
-      : filter === "completed"
-        ? tasks.filter((task) => task.completed)
-        : tasks;
-
-  if (categoryFilter !== "") {
-    filteredTasks = filteredTasks.filter(
-      (task) => task.category === categoryFilter
-    );
-  }
-
-  if (debouncedSearch.trim() !== "") {
-    const search = debouncedSearch.toLowerCase();
-
-    filteredTasks = filteredTasks.filter(
-      (task) =>
-        task.title.toLowerCase().includes(search) ||
-        task.description.toLowerCase().includes(search),
-    );
-  }
-
-  const priorityValue = {
-    High: 3,
-    Medium: 2,
-    Low: 1,
-  };
-
-  const sortedTasks = [...filteredTasks];
-
-  switch (sortOrder) {
-    case "high":
-      sortedTasks.sort(
-        (a, b) => priorityValue[b.priority] - priorityValue[a.priority],
+    if (categoryFilter) {
+      result = result.filter(
+        (task) => task.category === categoryFilter
       );
-      break;
+    }
 
-    case "low":
-      sortedTasks.sort(
-        (a, b) => priorityValue[a.priority] - priorityValue[b.priority],
+    if (searchText.trim()) {
+      const search = searchText.toLowerCase();
+
+      result = result.filter(
+        (task) =>
+          task.title.toLowerCase().includes(search) ||
+          task.description.toLowerCase().includes(search)
       );
-      break;
+    }
 
-    case "alpha":
-      sortedTasks.sort((a, b) =>
-        a.title.localeCompare(b.title, undefined, {
-          sensitivity: "base",
-        }),
-      );
-      break;
-    case "due":
-      sortedTasks.sort((a, b) => {
-        if (!a.dueDate && !b.dueDate) return 0;
-        if (!a.dueDate) return 1;
-        if (!b.dueDate) return -1;
+    const priorityValue = {
+      High: 3,
+      Medium: 2,
+      Low: 1,
+    };
 
-        return (
-          new Date(a.dueDate).getTime() -
-          new Date(b.dueDate).getTime()
+    result = [...result];
+
+    switch (sortOrder) {
+      case "high":
+        result.sort(
+          (a, b) =>
+            priorityValue[b.priority] -
+            priorityValue[a.priority]
         );
-      });
-      break;
+        break;
 
-    case "recent":
-    default:
-      break;
+      case "low":
+        result.sort(
+          (a, b) =>
+            priorityValue[a.priority] -
+            priorityValue[b.priority]
+        );
+        break;
+
+      case "alpha":
+        result.sort((a, b) =>
+          a.title.localeCompare(b.title, undefined, {
+            sensitivity: "base",
+          })
+        );
+        break;
+
+      case "due":
+        result.sort((a, b) => {
+          if (!a.dueDate && !b.dueDate) return 0;
+          if (!a.dueDate) return 1;
+          if (!b.dueDate) return -1;
+
+          return (
+            new Date(a.dueDate).getTime() -
+            new Date(b.dueDate).getTime()
+          );
+        });
+        break;
+    }
+
+    return result;
   }
+  const sortedTasks = useMemo(
+    () =>
+      filterAndSortTasks(
+        tasks,
+        filter,
+        categoryFilter,
+        debouncedSearch,
+        sortOrder
+      ),
+    [
+      tasks,
+      filter,
+      categoryFilter,
+      debouncedSearch,
+      sortOrder,
+    ]
+  );
 
   return (
     <>
