@@ -1,5 +1,6 @@
 import Button from "./Button";
 import FormInput from "./FormInput";
+import { useEffect, useRef } from "react";
 
 interface FilterBarProps {
   filter: "all" | "active" | "completed";
@@ -18,16 +19,28 @@ interface FilterBarProps {
 export default function FilterBar({
   filter,
   categoryFilter,
-  categories,
+  categories = [],
   sortOrder,
   searchText,
   setSortOrder,
   onFilterChange,
   setSearchText,
   onCategoryChange,
+
 }: FilterBarProps) {
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    searchInputRef.current?.focus();
+  },
+    []);
+
   return (
     <div>
+      <input
+        id="search-input"
+        type="text"
+        ref={searchInputRef}
+      />
       <Button
         variant={filter === "all" ? "primary" : "secondary"}
         onClick={() => onFilterChange("all")}

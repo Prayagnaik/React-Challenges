@@ -458,5 +458,67 @@
       "maintainability": 90,
       "overall": "The code is well-structured, maintainable, and easy to follow. However, there are some minor improvements that can be made to make the code even better."
     }
+  },
+  {
+    "challengeId": "21-react-router",
+    "challengeName": "React Router - Routing and Navigation",
+    "aiReview": {
+      "challengeId": "21-react-router",
+      "timestamp": "2026-08-12T07:02:41.426Z",
+      "score": 0,
+      "feedback": [],
+      "strengths": [],
+      "improvements": [],
+      "readability": 0,
+      "maintainability": 0,
+      "overall": "",
+      "error": "Groq API error (413): Request too large for model `llama-3.1-8b-instant` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 6350, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+    }
+  },
+  {
+    "challengeId": "22-data-fetching",
+    "challengeName": "Data Fetching - Loading and Error State",
+    "aiReview": {
+      "challengeId": "22-data-fetching",
+      "timestamp": "2026-08-12T07:07:34.360Z",
+      "score": 88,
+      "feedback": [],
+      "strengths": [
+        "Effective use of TypeScript and functional components",
+        "Proper handling of loading, error, and data states",
+        "Use of AbortController for cleanup in useEffect"
+      ],
+      "improvements": [
+        "Consider adding a loading animation to improve user experience",
+        "Error messages could be more descriptive and user-friendly",
+        "Consider adding a retry mechanism for failed fetch requests"
+      ],
+      "readability": 85,
+      "maintainability": 90,
+      "overall": "The code is well-structured and effectively handles data fetching and state management. However, there are opportunities to improve the user experience and error handling."
+    }
+  },
+  {
+    "challengeId": "23-useref-focus-management",
+    "challengeName": "useRef - Focus Management",
+    "aiReview": {
+      "challengeId": "23-useref-focus-management",
+      "timestamp": "2026-08-12T07:33:50.889Z",
+      "score": 88,
+      "feedback": [],
+      "strengths": [
+        "The code is well-organized and follows a consistent naming convention.",
+        "The use of TypeScript and functional components is a good practice.",
+        "The code is well-structured and easy to follow."
+      ],
+      "improvements": [
+        "The `useEffect` hook in the `FilterBar` component can be improved by adding a dependency array to prevent unnecessary re-renders.",
+        "The `filterAndSortTasks` function in the `TaskApp` component can be optimized by using a more efficient sorting algorithm.",
+        "The `calculateTaskStats` function in the `TaskApp` component can be improved by using a more efficient way to calculate the overdue tasks."
+      ],
+      "readability": 85,
+      "maintainability": 90,
+      "overall": "The code is well-structured and follows good practices, but there are some areas for improvement. With some minor adjustments, the code can be even more efficient and maintainable."
+    }
   }
 ]

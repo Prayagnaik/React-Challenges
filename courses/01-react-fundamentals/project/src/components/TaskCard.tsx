@@ -8,6 +8,7 @@ import Button from "./Button";
 import Badge from "./Badge";
 import StatusIndicator from "./StatusIndicator";
 import React from "react";
+import { Link } from "react-router-dom";
 
 /**
  * Props required to render a task card.
@@ -26,6 +27,7 @@ interface TaskCardProps {
   editingId?: string | number | null;
   setEditingId?: Dispatch<SetStateAction<string | number | null>>;
   dueDate?: string | number;
+  linkToTaskDetail?: boolean;
 }
 
 /**
@@ -178,7 +180,13 @@ function TaskCard(props: TaskCardProps) {
             textDecoration: isCompleted ? "line-through" : "none",
           }}
         >
-          {props.title}
+          {props.linkToTaskDetail ? (
+            <Link to={`/challenge/21-react-router/task/${props.id}`}>
+              {props.title}
+            </Link>
+          ) : (
+            props.title
+          )}
         </h2>
       )}
 
