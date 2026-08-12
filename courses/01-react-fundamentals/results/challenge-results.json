@@ -7046,16 +7046,16 @@
   {
     "challengeId": "21-react-router",
     "challengeName": "React Router - Routing and Navigation",
-    "timestamp": "2026-08-12T07:02:31.883Z",
+    "timestamp": "2026-08-12T07:41:57.731Z",
     "scores": {
       "functionalTests": 100,
       "codeQuality": 100,
       "architecture": 100,
       "bestPractices": 100,
       "e2eTests": 100,
-      "aiReview": 0
+      "aiReview": 83
     },
-    "totalScore": 85,
+    "totalScore": 97.45,
     "passed": true,
     "errors": [],
     "warnings": [],
@@ -7076,7 +7076,7 @@
               "fullName": " Challenge 21: React Router - Routing and Navigation TaskDetailPage should use useParams and render task detail or not found",
               "status": "passed",
               "title": "TaskDetailPage should use useParams and render task detail or not found",
-              "duration": 16,
+              "duration": 20,
               "failureMessages": []
             },
             {
@@ -7087,12 +7087,12 @@
               "fullName": " Challenge 21: React Router - Routing and Navigation TaskDetailPage should have back button with id task-detail-back",
               "status": "passed",
               "title": "TaskDetailPage should have back button with id task-detail-back",
-              "duration": 2,
+              "duration": 3,
               "failureMessages": []
             }
           ],
-          "startTime": 1786518154299,
-          "endTime": 1786518154317,
+          "startTime": 1786520521017,
+          "endTime": 1786520521040,
           "status": "passed",
           "message": "",
           "name": "C:/React/challenge-engine-react/courses/01-react-fundamentals/project/tests/challenge-21.test.tsx"
@@ -7304,12 +7304,12 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 258,
+                          "duration": 309,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
-                          "startTime": "2026-08-12T07:02:40.387Z",
+                          "startTime": "2026-08-12T07:42:08.652Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -7338,12 +7338,12 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 227,
+                          "duration": 256,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
-                          "startTime": "2026-08-12T07:02:40.740Z",
+                          "startTime": "2026-08-12T07:42:09.082Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -7372,12 +7372,12 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 198,
+                          "duration": 240,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
-                          "startTime": "2026-08-12T07:02:40.982Z",
+                          "startTime": "2026-08-12T07:42:09.351Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -7399,27 +7399,41 @@
     },
     "aiReviewResults": {
       "challengeId": "21-react-router",
-      "timestamp": "2026-08-12T07:02:41.426Z",
-      "score": 0,
+      "timestamp": "2026-08-12T07:42:09.966Z",
+      "score": 83,
       "feedback": [],
-      "strengths": [],
-      "improvements": [],
-      "readability": 0,
-      "maintainability": 0,
-      "overall": "",
-      "error": "Groq API error (413): Request too large for model `llama-3.1-8b-instant` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 6350, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+      "strengths": [
+        "The code is well-structured and follows a consistent naming convention.",
+        "The use of TypeScript and React Hooks is well-implemented and makes the code more maintainable.",
+        "The code includes proper error handling and edge cases, making it more robust."
+      ],
+      "improvements": [
+        "Some of the functions are quite long and complex, making them difficult to read and understand. Consider breaking them down into smaller, more manageable functions.",
+        "There are some repeated code blocks, such as the `getDueDate` function in `TaskCard.tsx`. Consider extracting these into a separate utility function to avoid duplication.",
+        "The code could benefit from more comments and documentation, especially in complex functions or areas with multiple conditional statements."
+      ],
+      "readability": 85,
+      "maintainability": 80,
+      "overall": "The code is well-structured and maintainable, with a good use of TypeScript and React Hooks. However, there are some areas for improvement, such as breaking down long functions and extracting repeated code blocks. With some additional comments and documentation, the code could be even more readable and maintainable."
     },
     "aiResults": {
       "challengeId": "21-react-router",
-      "timestamp": "2026-08-12T07:02:41.426Z",
-      "score": 0,
+      "timestamp": "2026-08-12T07:42:09.966Z",
+      "score": 83,
       "feedback": [],
-      "strengths": [],
-      "improvements": [],
-      "readability": 0,
-      "maintainability": 0,
-      "overall": "",
-      "error": "Groq API error (413): Request too large for model `llama-3.1-8b-instant` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per minute (TPM): Limit 6000, Requested 6350, please reduce your message size and try again. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+      "strengths": [
+        "The code is well-structured and follows a consistent naming convention.",
+        "The use of TypeScript and React Hooks is well-implemented and makes the code more maintainable.",
+        "The code includes proper error handling and edge cases, making it more robust."
+      ],
+      "improvements": [
+        "Some of the functions are quite long and complex, making them difficult to read and understand. Consider breaking them down into smaller, more manageable functions.",
+        "There are some repeated code blocks, such as the `getDueDate` function in `TaskCard.tsx`. Consider extracting these into a separate utility function to avoid duplication.",
+        "The code could benefit from more comments and documentation, especially in complex functions or areas with multiple conditional statements."
+      ],
+      "readability": 85,
+      "maintainability": 80,
+      "overall": "The code is well-structured and maintainable, with a good use of TypeScript and React Hooks. However, there are some areas for improvement, such as breaking down long functions and extracting repeated code blocks. With some additional comments and documentation, the code could be even more readable and maintainable."
     }
   },
   {
