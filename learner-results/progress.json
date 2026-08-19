@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-08-12T07:42:12.227Z",
+  "lastUpdated": "2026-08-19T11:33:25.580Z",
   "pathway": {
     "name": "Modern React Engineer",
     "version": "1.0.0",
-    "overallScore": 32.2,
-    "completionPercentage": 43.4,
+    "overallScore": 59.5,
+    "completionPercentage": 50.9,
     "badgeLevel": "none",
     "totalChallenges": 53,
-    "completedChallenges": 23
+    "completedChallenges": 27
   },
   "courses": {
     "01-react-fundamentals": {
@@ -369,12 +369,73 @@
     "02-redux-rtk-query": {
       "courseId": "02-redux-rtk-query",
       "courseName": "Redux & RTK Query",
-      "averageScore": 0,
-      "completionPercentage": 0,
+      "averageScore": 82.7,
+      "completionPercentage": 30.8,
       "badgeLevel": "none",
       "totalChallenges": 13,
-      "completedChallenges": 0,
-      "challenges": {}
+      "completedChallenges": 4,
+      "challenges": {
+        "01-store-setup": {
+          "challengeId": "01-store-setup",
+          "challengeName": "Store Setup with configureStore",
+          "passed": true,
+          "score": 83.2,
+          "lastRun": "2026-08-19T10:41:40.276Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 0,
+            "aiReview": 88
+          }
+        },
+        "02-first-slice": {
+          "challengeId": "02-first-slice",
+          "challengeName": "First Slice with createSlice",
+          "passed": true,
+          "score": 83.65,
+          "lastRun": "2026-08-19T10:59:50.323Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 0,
+            "aiReview": 91
+          }
+        },
+        "03-reading-dispatching": {
+          "challengeId": "03-reading-dispatching",
+          "challengeName": "Reading and Dispatching in Components",
+          "passed": true,
+          "score": 81.1,
+          "lastRun": "2026-08-19T11:26:53.601Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 0,
+            "aiReview": 74
+          }
+        },
+        "04-multiple-slices": {
+          "challengeId": "04-multiple-slices",
+          "challengeName": "Multiple Slices in the Store",
+          "passed": true,
+          "score": 82.9,
+          "lastRun": "2026-08-19T11:33:17.320Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 0,
+            "aiReview": 86
+          }
+        }
+      }
     },
     "03-nextjs-app-router": {
       "courseId": "03-nextjs-app-router",

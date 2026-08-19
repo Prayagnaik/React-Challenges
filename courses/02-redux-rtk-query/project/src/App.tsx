@@ -32,7 +32,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<ChallengeList />} />
-            <Route path="/challenge/01-store-setup" element={<div id="challenge-01" style={{ padding: '2rem' }}><h2>Challenge 01: Store Setup</h2><p>Ensure store and Provider are set up per README.</p></div>} />
+            <Route path="/challenge/01-store-setup" element={<div id="challenge-01" style={{ padding: '2rem' }}><h1>Challenge 01</h1><h2>Store Setup</h2></div>} />
             <Route path="/challenge/02-first-slice" element={<div id="challenge-02" style={{ padding: '2rem' }}><h2>Challenge 02: First Slice</h2><p>Create counter slice per README.</p></div>} />
             <Route path="/challenge/03-reading-dispatching" element={<div style={{ padding: '2rem' }}><h2>Challenge 03: Reading and Dispatching</h2><CounterView /></div>} />
             <Route path="/challenge/04-multiple-slices" element={<div id="challenge-04" style={{ padding: '2rem' }}><h2>Challenge 04: Multiple Slices</h2><p>Add ui slice per README.</p></div>} />

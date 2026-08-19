@@ -27,21 +27,44 @@ export async function runE2ETests(challengeId, projectDir) {
     const env = { ...process.env, CI: '1' };
     let output;
     if (process.platform === 'win32') {
-      output = execSync(`npx playwright test "${testFileRel}" --reporter=json`, {
-        cwd: projectDir,
-        encoding: 'utf-8',
-        timeout: E2E_TIMEOUT_MS,
-        env,
-        stdio: ['pipe', 'pipe', 'pipe']
-      });
-    } else {
-      const result = spawnSync('npx', ['playwright', 'test', testFileRel, '--reporter=json'], {
-        cwd: projectDir,
-        encoding: 'utf-8',
-        timeout: E2E_TIMEOUT_MS,
-        env,
-        shell: false
-      });
+      const playwrightCmd = join(
+        projectDir,
+        'node_modules',
+        '.bin',
+        'playwright.cmd'
+      );
+
+      output = execSync(
+        `"${playwrightCmd}" test "${testFileRel}" --reporter=json`,
+        {
+          cwd: projectDir,
+          encoding: 'utf-8',
+          timeout: E2E_TIMEOUT_MS,
+          env,
+          stdio: ['pipe', 'pipe', 'pipe']
+        }
+      );
+    }
+    else {
+      const playwrightCmd = join(
+        projectDir,
+        'node_modules',
+        '.bin',
+        'playwright'
+      );
+
+      const result = spawnSync(
+        playwrightCmd,
+        ['test', testFileRel, '--reporter=json'],
+        {
+          cwd: projectDir,
+          encoding: 'utf-8',
+          timeout: E2E_TIMEOUT_MS,
+          env,
+          shell: false
+        }
+      );
+
       output = (result.stdout || '') + (result.stderr || '');
       if (result.error) throw result.error;
       if (result.status !== 0) {
