@@ -274,7 +274,7 @@
     "challengeName": "Error and Loading UX",
     "aiReview": {
       "challengeId": "12-error-loading-ux",
-      "timestamp": "2026-08-20T16:52:06.674Z",
+      "timestamp": "2026-08-20T16:55:30.524Z",
       "score": 0,
       "feedback": [],
       "strengths": [],
@@ -282,7 +282,23 @@
       "readability": 0,
       "maintainability": 0,
       "overall": "",
-      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195595, Requested 5311. Please try again in 6m31.392s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 195124, Requested 5311. Please try again in 3m7.92s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+    }
+  },
+  {
+    "challengeId": "13-query-parameters",
+    "challengeName": "Query with Parameters and Detail View",
+    "aiReview": {
+      "challengeId": "13-query-parameters",
+      "timestamp": "2026-08-20T17:20:43.767Z",
+      "score": 0,
+      "feedback": [],
+      "strengths": [],
+      "improvements": [],
+      "readability": 0,
+      "maintainability": 0,
+      "overall": "",
+      "requirementCompliance": 0
     }
   }
 ]

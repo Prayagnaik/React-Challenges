@@ -11,6 +11,7 @@ export const apiSlice = createApi({
     tagTypes: ['User', 'Post'],
 
     endpoints: (builder) => ({
+        // Challenge 07
         getUsers: builder.query<User[], void>({
             queryFn: async () => {
                 const users = await mockApi.getUsers()
@@ -30,6 +31,7 @@ export const apiSlice = createApi({
                     : [{ type: 'User' as const, id: 'LIST' }],
         }),
 
+        // Challenge 08 / 11
         getPosts: builder.query<Post[], void>({
             queryFn: async () => {
                 const posts = await mockApi.getPosts()
@@ -49,6 +51,20 @@ export const apiSlice = createApi({
                     : [{ type: 'Post' as const, id: 'LIST' }],
         }),
 
+        // Challenge 13
+        getPostById: builder.query<Post, number>({
+            queryFn: async (id) => {
+                const post = await mockApi.getPostById(id)
+
+                return { data: post }
+            },
+
+            providesTags: (result, error, id) => [
+                { type: 'Post' as const, id },
+            ],
+        }),
+
+        // Challenge 09 / 10
         addPost: builder.mutation<Post, Omit<Post, 'id'>>({
             queryFn: async (post) => {
                 const newPost = await mockApi.createPost(post)
@@ -85,5 +101,6 @@ export const apiSlice = createApi({
 export const {
     useGetUsersQuery,
     useGetPostsQuery,
+    useGetPostByIdQuery,
     useAddPostMutation,
 } = apiSlice
