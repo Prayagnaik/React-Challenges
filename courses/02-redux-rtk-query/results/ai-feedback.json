@@ -236,5 +236,21 @@
       "overall": "The implementation meets the core requirements: tag types are defined, queries provide tags, and a mutation invalidates tags, ensuring automatic refetching. The code follows RTK Query conventions and is type‑safe, but adding invalidation for all mutating endpoints and refactoring duplicated tag logic would further strengthen maintainability.",
       "requirementCompliance": 90
     }
+  },
+  {
+    "challengeId": "10-optimistic-updates",
+    "challengeName": "Optimistic Updates",
+    "aiReview": {
+      "challengeId": "10-optimistic-updates",
+      "timestamp": "2026-08-20T12:15:23.837Z",
+      "score": 0,
+      "feedback": [],
+      "strengths": [],
+      "improvements": [],
+      "readability": 0,
+      "maintainability": 0,
+      "overall": "",
+      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199294, Requested 3858. Please try again in 22m41.664s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+    }
   }
 ]
