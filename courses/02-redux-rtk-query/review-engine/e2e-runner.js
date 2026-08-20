@@ -27,15 +27,16 @@ export async function runE2ETests(challengeId, projectDir) {
     const env = { ...process.env, CI: '1' };
     let output;
     if (process.platform === 'win32') {
-      const playwrightCmd = join(
+      const playwrightBin = join(
         projectDir,
         'node_modules',
         '.bin',
         'playwright.cmd'
       );
 
-      output = execSync(
-        `"${playwrightCmd}" test "${testFileRel}" --reporter=json`,
+      output = execFileSync(
+        playwrightBin,
+        ['test', testFileRel, '--reporter=json'],
         {
           cwd: projectDir,
           encoding: 'utf-8',

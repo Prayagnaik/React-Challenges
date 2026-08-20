@@ -815,5 +815,206 @@
       "overall": "The implementation satisfies all functional requirements: a second UI slice is created, both slices are registered in the store, and typed hooks are provided. The code is clean and follows Redux Toolkit conventions, though adding explicit state types and named exports would further improve clarity and maintainability.",
       "requirementCompliance": 92
     }
+  },
+  {
+    "challengeId": "05-async-thunks",
+    "challengeName": "Async Logic with createAsyncThunk",
+    "timestamp": "2026-08-20T06:09:50.858Z",
+    "scores": {
+      "functionalTests": 100,
+      "codeQuality": 100,
+      "architecture": 100,
+      "bestPractices": 100,
+      "e2eTests": 0,
+      "aiReview": 86
+    },
+    "totalScore": 82.9,
+    "passed": true,
+    "errors": [],
+    "warnings": [],
+    "testResults": {
+      "score": 100,
+      "passed": true,
+      "totalTests": 3,
+      "passedTests": 3,
+      "failedTests": 0,
+      "details": [
+        {
+          "assertionResults": [
+            {
+              "ancestorTitles": [
+                "",
+                "Challenge 05: Async Logic with createAsyncThunk"
+              ],
+              "fullName": " Challenge 05: Async Logic with createAsyncThunk usersSlice uses createAsyncThunk",
+              "status": "passed",
+              "title": "usersSlice uses createAsyncThunk",
+              "duration": 1,
+              "failureMessages": []
+            },
+            {
+              "ancestorTitles": [
+                "",
+                "Challenge 05: Async Logic with createAsyncThunk"
+              ],
+              "fullName": " Challenge 05: Async Logic with createAsyncThunk usersSlice uses extraReducers",
+              "status": "passed",
+              "title": "usersSlice uses extraReducers",
+              "duration": 0,
+              "failureMessages": []
+            },
+            {
+              "ancestorTitles": [
+                "",
+                "Challenge 05: Async Logic with createAsyncThunk"
+              ],
+              "fullName": " Challenge 05: Async Logic with createAsyncThunk store includes users reducer",
+              "status": "passed",
+              "title": "store includes users reducer",
+              "duration": 0,
+              "failureMessages": []
+            }
+          ],
+          "startTime": 1787206193744,
+          "endTime": 1787206193746,
+          "status": "passed",
+          "message": "",
+          "name": "C:/React/challenge-engine-react/courses/02-redux-rtk-query/project/tests/challenge-05.test.tsx"
+        }
+      ]
+    },
+    "lintResults": {
+      "score": 100,
+      "passed": true,
+      "totalIssues": 0,
+      "errors": 0,
+      "warnings": 0,
+      "details": [
+        {
+          "filePath": "C:\\React\\challenge-engine-react\\courses\\02-redux-rtk-query\\project\\src\\store\\slices\\usersSlice.ts",
+          "messages": [],
+          "suppressedMessages": [],
+          "errorCount": 0,
+          "fatalErrorCount": 0,
+          "warningCount": 0,
+          "fixableErrorCount": 0,
+          "fixableWarningCount": 0,
+          "usedDeprecatedRules": [
+            {
+              "ruleId": "no-extra-semi",
+              "replacedBy": []
+            },
+            {
+              "ruleId": "no-mixed-spaces-and-tabs",
+              "replacedBy": []
+            }
+          ]
+        },
+        {
+          "filePath": "C:\\React\\challenge-engine-react\\courses\\02-redux-rtk-query\\project\\src\\store\\store.ts",
+          "messages": [],
+          "suppressedMessages": [],
+          "errorCount": 0,
+          "fatalErrorCount": 0,
+          "warningCount": 0,
+          "fixableErrorCount": 0,
+          "fixableWarningCount": 0,
+          "usedDeprecatedRules": [
+            {
+              "ruleId": "no-extra-semi",
+              "replacedBy": []
+            },
+            {
+              "ruleId": "no-mixed-spaces-and-tabs",
+              "replacedBy": []
+            }
+          ]
+        }
+      ]
+    },
+    "architectureResults": {
+      "score": 100,
+      "passed": true,
+      "patternsFound": [
+        "reducer",
+        "middleware"
+      ],
+      "patternsMissing": [],
+      "details": [
+        {
+          "file": "src/store/slices/usersSlice.ts",
+          "patternsFound": [],
+          "patternsMissing": []
+        },
+        {
+          "file": "src/store/store.ts",
+          "patternsFound": [
+            "reducer",
+            "middleware"
+          ],
+          "patternsMissing": []
+        }
+      ]
+    },
+    "bestPracticesResults": {
+      "score": 100,
+      "passed": true,
+      "issues": [],
+      "details": [],
+      "note": "No best practices requirements specified in challenge"
+    },
+    "e2eResults": {
+      "score": 0,
+      "passed": false,
+      "error": "execFileSync is not defined",
+      "details": [],
+      "note": "E2E failed. The app is started automatically by Playwright (webServer in playwright.config)."
+    },
+    "aiReviewResults": {
+      "challengeId": "05-async-thunks",
+      "timestamp": "2026-08-20T06:09:55.972Z",
+      "score": 86,
+      "feedback": [],
+      "strengths": [
+        "Correct implementation of `createAsyncThunk` and `extraReducers` to handle pending, fulfilled, and rejected states.",
+        "Clear separation of concerns: slice logic is isolated in `usersSlice.ts` and the reducer is added to the store in `store.ts`.",
+        "Consistent TypeScript usage with interfaces for `User` and `UsersState`, ensuring type safety across the slice."
+      ],
+      "improvements": [
+        "Add generic type parameters to `createAsyncThunk` (e.g., `createAsyncThunk<User[], void>`) so the payload type is explicit and the compiler can catch mismatches.",
+        "Export the `User` and `UsersState` types from `usersSlice.ts` (or a dedicated `types.ts`) so other modules can import them for consistency.",
+        "Use `async/await` in the thunk for readability: `async () => await mockApi.getUsers()`.",
+        "Consider using `rejectWithValue` to return a custom error payload instead of relying on `action.error.message`.",
+        "Add a small comment block above the slice explaining the purpose of each state field (`list`, `loading`, `error`).",
+        "If you plan to extend the slice later, expose the slice itself (`export const usersSlice = usersSlice`) or at least its actions for future use."
+      ],
+      "readability": 85,
+      "maintainability": 80,
+      "overall": "The implementation satisfies all functional requirements: it correctly uses `createAsyncThunk` and `extraReducers`, integrates the reducer into the store, and follows TypeScript best practices. While RTK Query is not used (as the challenge focuses on thunks), the code is clean, well‑structured, and ready for future expansion.",
+      "requirementCompliance": 90
+    },
+    "aiResults": {
+      "challengeId": "05-async-thunks",
+      "timestamp": "2026-08-20T06:09:55.972Z",
+      "score": 86,
+      "feedback": [],
+      "strengths": [
+        "Correct implementation of `createAsyncThunk` and `extraReducers` to handle pending, fulfilled, and rejected states.",
+        "Clear separation of concerns: slice logic is isolated in `usersSlice.ts` and the reducer is added to the store in `store.ts`.",
+        "Consistent TypeScript usage with interfaces for `User` and `UsersState`, ensuring type safety across the slice."
+      ],
+      "improvements": [
+        "Add generic type parameters to `createAsyncThunk` (e.g., `createAsyncThunk<User[], void>`) so the payload type is explicit and the compiler can catch mismatches.",
+        "Export the `User` and `UsersState` types from `usersSlice.ts` (or a dedicated `types.ts`) so other modules can import them for consistency.",
+        "Use `async/await` in the thunk for readability: `async () => await mockApi.getUsers()`.",
+        "Consider using `rejectWithValue` to return a custom error payload instead of relying on `action.error.message`.",
+        "Add a small comment block above the slice explaining the purpose of each state field (`list`, `loading`, `error`).",
+        "If you plan to extend the slice later, expose the slice itself (`export const usersSlice = usersSlice`) or at least its actions for future use."
+      ],
+      "readability": 85,
+      "maintainability": 80,
+      "overall": "The implementation satisfies all functional requirements: it correctly uses `createAsyncThunk` and `extraReducers`, integrates the reducer into the store, and follows TypeScript best practices. While RTK Query is not used (as the challenge focuses on thunks), the code is clean, well‑structured, and ready for future expansion.",
+      "requirementCompliance": 90
+    }
   }
 ]

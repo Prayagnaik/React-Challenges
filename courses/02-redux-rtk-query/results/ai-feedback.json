@@ -103,5 +103,32 @@
       "overall": "The implementation satisfies all functional requirements: a second UI slice is created, both slices are registered in the store, and typed hooks are provided. The code is clean and follows Redux Toolkit conventions, though adding explicit state types and named exports would further improve clarity and maintainability.",
       "requirementCompliance": 92
     }
+  },
+  {
+    "challengeId": "05-async-thunks",
+    "challengeName": "Async Logic with createAsyncThunk",
+    "aiReview": {
+      "challengeId": "05-async-thunks",
+      "timestamp": "2026-08-20T06:09:55.972Z",
+      "score": 86,
+      "feedback": [],
+      "strengths": [
+        "Correct implementation of `createAsyncThunk` and `extraReducers` to handle pending, fulfilled, and rejected states.",
+        "Clear separation of concerns: slice logic is isolated in `usersSlice.ts` and the reducer is added to the store in `store.ts`.",
+        "Consistent TypeScript usage with interfaces for `User` and `UsersState`, ensuring type safety across the slice."
+      ],
+      "improvements": [
+        "Add generic type parameters to `createAsyncThunk` (e.g., `createAsyncThunk<User[], void>`) so the payload type is explicit and the compiler can catch mismatches.",
+        "Export the `User` and `UsersState` types from `usersSlice.ts` (or a dedicated `types.ts`) so other modules can import them for consistency.",
+        "Use `async/await` in the thunk for readability: `async () => await mockApi.getUsers()`.",
+        "Consider using `rejectWithValue` to return a custom error payload instead of relying on `action.error.message`.",
+        "Add a small comment block above the slice explaining the purpose of each state field (`list`, `loading`, `error`).",
+        "If you plan to extend the slice later, expose the slice itself (`export const usersSlice = usersSlice`) or at least its actions for future use."
+      ],
+      "readability": 85,
+      "maintainability": 80,
+      "overall": "The implementation satisfies all functional requirements: it correctly uses `createAsyncThunk` and `extraReducers`, integrates the reducer into the store, and follows TypeScript best practices. While RTK Query is not used (as the challenge focuses on thunks), the code is clean, well‑structured, and ready for future expansion.",
+      "requirementCompliance": 90
+    }
   }
 ]
