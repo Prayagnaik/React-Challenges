@@ -1,7 +1,9 @@
 import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { parse } from '@babel/parser';
-import traverse from '@babel/traverse';
+import traverseModule from '@babel/traverse';
+
+const traverse = traverseModule.default || traverseModule;
 
 /**
  * File-specific pattern rules

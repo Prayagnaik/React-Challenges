@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-08-20T06:09:59.531Z",
+  "lastUpdated": "2026-08-20T11:31:58.928Z",
   "pathway": {
     "name": "Modern React Engineer",
     "version": "1.0.0",
-    "overallScore": 59.5,
-    "completionPercentage": 52.8,
+    "overallScore": 59.4,
+    "completionPercentage": 56.6,
     "badgeLevel": "none",
     "totalChallenges": 53,
-    "completedChallenges": 28
+    "completedChallenges": 30
   },
   "courses": {
     "01-react-fundamentals": {
@@ -369,11 +369,11 @@
     "02-redux-rtk-query": {
       "courseId": "02-redux-rtk-query",
       "courseName": "Redux & RTK Query",
-      "averageScore": 82.8,
-      "completionPercentage": 38.5,
-      "badgeLevel": "none",
+      "averageScore": 82.3,
+      "completionPercentage": 53.8,
+      "badgeLevel": "bronze",
       "totalChallenges": 13,
-      "completedChallenges": 5,
+      "completedChallenges": 7,
       "challenges": {
         "01-store-setup": {
           "challengeId": "01-store-setup",
@@ -448,6 +448,36 @@
             "bestPractices": 100,
             "e2eTests": 0,
             "aiReview": 86
+          }
+        },
+        "06-rtk-query-setup": {
+          "challengeId": "06-rtk-query-setup",
+          "challengeName": "RTK Query Setup and API Slice",
+          "passed": true,
+          "score": 80.65,
+          "lastRun": "2026-08-20T10:56:15.419Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 0,
+            "aiReview": 71
+          }
+        },
+        "07-queries": {
+          "challengeId": "07-queries",
+          "challengeName": "Query Endpoints and useQuery Hooks",
+          "passed": true,
+          "score": 81.7,
+          "lastRun": "2026-08-20T11:31:14.568Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 0,
+            "aiReview": 78
           }
         }
       }

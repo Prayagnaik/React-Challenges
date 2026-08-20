@@ -130,5 +130,59 @@
       "overall": "The implementation satisfies all functional requirements: it correctly uses `createAsyncThunk` and `extraReducers`, integrates the reducer into the store, and follows TypeScript best practices. While RTK Query is not used (as the challenge focuses on thunks), the code is clean, well‑structured, and ready for future expansion.",
       "requirementCompliance": 90
     }
+  },
+  {
+    "challengeId": "06-rtk-query-setup",
+    "challengeName": "RTK Query Setup and API Slice",
+    "aiReview": {
+      "challengeId": "06-rtk-query-setup",
+      "timestamp": "2026-08-20T10:56:19.706Z",
+      "score": 71,
+      "feedback": [],
+      "strengths": [
+        "The API slice is cleanly defined using `createApi` and `fetchBaseQuery`, making it easy to extend with more endpoints.",
+        "Mock API data is well‑structured with TypeScript interfaces, providing type safety for the mock server.",
+        "The store and hooks are separated into dedicated files (`store.ts`, `hooks.ts`), keeping the architecture modular."
+      ],
+      "improvements": [
+        "Add the RTK Query middleware to the store: `middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)` in `src/store/store.ts`.",
+        "Specify generic types for the query endpoint to give `useGetUsersQuery` a concrete return type, e.g. `builder.query<User[], void>({ ... })`.",
+        "Consider using `query` instead of `queryFn` for the `getUsers` endpoint to keep the API slice closer to typical REST patterns.",
+        "Remove the unused `usersReducer` import if it is not part of the current challenge to avoid lint warnings.",
+        "Add `tagTypes` and `providesTags`/`invalidatesTags` to the API slice if you plan to use cache invalidation in later challenges."
+      ],
+      "readability": 85,
+      "maintainability": 70,
+      "overall": "The implementation demonstrates a solid grasp of RTK Query basics, but it falls short of the challenge requirement by omitting the essential middleware integration. Adding the middleware and tightening type definitions will bring the solution fully compliant and ready for future expansion.",
+      "requirementCompliance": 60
+    }
+  },
+  {
+    "challengeId": "07-queries",
+    "challengeName": "Query Endpoints and useQuery Hooks",
+    "aiReview": {
+      "challengeId": "07-queries",
+      "timestamp": "2026-08-20T11:31:55.689Z",
+      "score": 78,
+      "feedback": [],
+      "strengths": [
+        "Clear separation of concerns: API logic lives in `apiSlice.ts` while UI is in `UsersList.tsx`.",
+        "Consistent use of TypeScript types (`User[]`, `void`) and proper imports.",
+        "All required data‑testids are present, making the component testable."
+      ],
+      "improvements": [
+        "Move the query logic to a standard `query` field instead of `queryFn` in `apiSlice.ts` to follow the typical RTK Query pattern: `getUsers: builder.query<User[], void>({ query: () => 'users' })`.",
+        "Add the `apiSlice.reducer` and `apiSlice.middleware` to the Redux store (likely in `store.ts`) and expose the reducer path (`api`) so that RTK Query can function correctly.",
+        "Ensure the route `/challenge/07-queries` renders `UsersList` in the router configuration (e.g., in `App.tsx`). Without this, the component will never be displayed.",
+        "Use the `isError` flag instead of checking `error` directly for a clearer intent: `const { data, isLoading, isError, error } = useGetUsersQuery();`.",
+        "Optionally display the actual error message: `<p data-testid=\"users-error\">{error?.message ?? 'Failed to load users.'}</p>`.",
+        "Add a `providesTags` array to the `getUsers` endpoint if future caching or invalidation is required.",
+        "Add a small comment explaining why `mockApi.getUsers()` is used instead of a real endpoint."
+      ],
+      "readability": 85,
+      "maintainability": 80,
+      "overall": "The implementation correctly defines a `getUsers` query and consumes it with `useGetUsersQuery`, handling loading and error states. However, to fully satisfy the challenge, the API slice must be wired into the Redux store and the route must render the component. Once those integrations are added, the solution will meet all functional and architectural requirements.",
+      "requirementCompliance": 70
+    }
   }
 ]
