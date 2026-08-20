@@ -3,16 +3,17 @@ import counterReducer from './slices/counterSlice'
 import uiReducer from './slices/uiSlice'
 import usersReducer from './slices/usersSlice'
 import { apiSlice } from '../api/apiSlice'
-
+import filtersreducer from './slices/filtersSlice'
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     ui: uiReducer,
     users: usersReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
+    filters: filtersreducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware(),
+    getDefaultMiddleware().concat(apiSlice.middleware),
 })
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

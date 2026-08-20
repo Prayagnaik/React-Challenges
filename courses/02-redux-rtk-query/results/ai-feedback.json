@@ -242,7 +242,7 @@
     "challengeName": "Optimistic Updates",
     "aiReview": {
       "challengeId": "10-optimistic-updates",
-      "timestamp": "2026-08-20T12:15:23.837Z",
+      "timestamp": "2026-08-20T12:16:19.369Z",
       "score": 0,
       "feedback": [],
       "strengths": [],
@@ -250,7 +250,23 @@
       "readability": 0,
       "maintainability": 0,
       "overall": "",
-      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199294, Requested 3858. Please try again in 22m41.664s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199165, Requested 3858. Please try again in 21m45.936s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
+    }
+  },
+  {
+    "challengeId": "11-api-local-state",
+    "challengeName": "API and Local State Together",
+    "aiReview": {
+      "challengeId": "11-api-local-state",
+      "timestamp": "2026-08-20T16:46:13.990Z",
+      "score": 0,
+      "feedback": [],
+      "strengths": [],
+      "improvements": [],
+      "readability": 0,
+      "maintainability": 0,
+      "overall": "",
+      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 196411, Requested 6136. Please try again in 18m20.304s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
     }
   }
 ]
