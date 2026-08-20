@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-08-20T16:46:15.826Z",
+  "lastUpdated": "2026-08-20T16:52:08.194Z",
   "pathway": {
     "name": "Modern React Engineer",
     "version": "1.0.0",
     "overallScore": 60,
-    "completionPercentage": 64.2,
+    "completionPercentage": 66,
     "badgeLevel": "bronze",
     "totalChallenges": 53,
-    "completedChallenges": 34
+    "completedChallenges": 35
   },
   "courses": {
     "01-react-fundamentals": {
@@ -370,10 +370,10 @@
       "courseId": "02-redux-rtk-query",
       "courseName": "Redux & RTK Query",
       "averageScore": 84.3,
-      "completionPercentage": 84.6,
+      "completionPercentage": 92.3,
       "badgeLevel": "silver",
       "totalChallenges": 13,
-      "completedChallenges": 11,
+      "completedChallenges": 12,
       "challenges": {
         "01-store-setup": {
           "challengeId": "01-store-setup",
@@ -530,7 +530,22 @@
           "challengeName": "API and Local State Together",
           "passed": true,
           "score": 85,
-          "lastRun": "2026-08-20T16:46:00.310Z",
+          "lastRun": "2026-08-20T16:46:58.786Z",
+          "scores": {
+            "functionalTests": 100,
+            "codeQuality": 100,
+            "architecture": 100,
+            "bestPractices": 100,
+            "e2eTests": 100,
+            "aiReview": 0
+          }
+        },
+        "12-error-loading-ux": {
+          "challengeId": "12-error-loading-ux",
+          "challengeName": "Error and Loading UX",
+          "passed": true,
+          "score": 85,
+          "lastRun": "2026-08-20T16:51:54.084Z",
           "scores": {
             "functionalTests": 100,
             "codeQuality": 100,
