@@ -3307,7 +3307,7 @@
   {
     "challengeId": "13-query-parameters",
     "challengeName": "Query with Parameters and Detail View",
-    "timestamp": "2026-08-20T17:20:34.302Z",
+    "timestamp": "2026-08-20T17:21:49.907Z",
     "scores": {
       "functionalTests": 100,
       "codeQuality": 100,
@@ -3348,7 +3348,7 @@
               "fullName": " Challenge 13: Query with Parameters and Detail View PostDetail uses useGetPostByIdQuery or generated query hook",
               "status": "passed",
               "title": "PostDetail uses useGetPostByIdQuery or generated query hook",
-              "duration": 0,
+              "duration": 1,
               "failureMessages": []
             },
             {
@@ -3363,8 +3363,8 @@
               "failureMessages": []
             }
           ],
-          "startTime": 1787246436609,
-          "endTime": 1787246436610,
+          "startTime": 1787246512178,
+          "endTime": 1787246512180,
           "status": "passed",
           "message": "",
           "name": "C:/React/challenge-engine-react/courses/02-redux-rtk-query/project/tests/challenge-13.test.tsx"
@@ -3481,12 +3481,12 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 248,
+                          "duration": 242,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
-                          "startTime": "2026-08-20T17:20:42.635Z",
+                          "startTime": "2026-08-20T17:21:58.200Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -3515,12 +3515,12 @@
                           "workerIndex": 0,
                           "parallelIndex": 0,
                           "status": "passed",
-                          "duration": 551,
+                          "duration": 558,
                           "errors": [],
                           "stdout": [],
                           "stderr": [],
                           "retry": 0,
-                          "startTime": "2026-08-20T17:20:42.982Z",
+                          "startTime": "2026-08-20T17:21:58.531Z",
                           "annotations": [],
                           "attachments": []
                         }
@@ -3542,7 +3542,7 @@
     },
     "aiReviewResults": {
       "challengeId": "13-query-parameters",
-      "timestamp": "2026-08-20T17:20:43.767Z",
+      "timestamp": "2026-08-20T17:21:59.313Z",
       "score": 0,
       "feedback": [],
       "strengths": [],
@@ -3550,11 +3550,11 @@
       "readability": 0,
       "maintainability": 0,
       "overall": "",
-      "requirementCompliance": 0
+      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199831, Requested 7224. Please try again in 50m47.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
     },
     "aiResults": {
       "challengeId": "13-query-parameters",
-      "timestamp": "2026-08-20T17:20:43.767Z",
+      "timestamp": "2026-08-20T17:21:59.313Z",
       "score": 0,
       "feedback": [],
       "strengths": [],
@@ -3562,7 +3562,7 @@
       "readability": 0,
       "maintainability": 0,
       "overall": "",
-      "requirementCompliance": 0
+      "error": "Groq API error (429): Rate limit reached for model `openai/gpt-oss-20b` in organization `org_01kz67whx2ecftggjwk8ett0j2` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199831, Requested 7224. Please try again in 50m47.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing"
     }
   }
 ]
