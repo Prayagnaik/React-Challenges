@@ -1,13 +1,13 @@
 {
-  "lastUpdated": "2026-08-28T12:23:41.286Z",
+  "lastUpdated": "2026-08-28T13:10:45.630Z",
   "pathway": {
     "name": "Modern React Engineer",
     "version": "1.0.0",
-    "overallScore": 88.7,
-    "completionPercentage": 98.1,
+    "overallScore": 89,
+    "completionPercentage": 100,
     "badgeLevel": "silver",
     "totalChallenges": 53,
-    "completedChallenges": 52
+    "completedChallenges": 53
   },
   "courses": {
     "01-react-fundamentals": {
@@ -575,11 +575,11 @@
     "03-nextjs-app-router": {
       "courseId": "03-nextjs-app-router",
       "courseName": "Next.js App Router",
-      "averageScore": 84.1,
-      "completionPercentage": 94.1,
+      "averageScore": 85,
+      "completionPercentage": 100,
       "badgeLevel": "silver",
       "totalChallenges": 17,
-      "completedChallenges": 16,
+      "completedChallenges": 17,
       "challenges": {
         "01-app-router-pages-layout": {
           "challengeId": "01-app-router-pages-layout",
@@ -704,15 +704,15 @@
         "09-server-actions-and-revalidation": {
           "challengeId": "09-server-actions-and-revalidation",
           "challengeName": "Server Actions and Revalidation",
-          "passed": false,
-          "score": 70,
-          "lastRun": "2026-08-28T12:23:26.816Z",
+          "passed": true,
+          "score": 85,
+          "lastRun": "2026-08-28T13:10:32.581Z",
           "scores": {
             "functionalTests": 100,
             "codeQuality": 100,
             "architecture": 100,
             "bestPractices": 100,
-            "e2eTests": 0,
+            "e2eTests": 100,
             "aiReview": 0
           }
         },

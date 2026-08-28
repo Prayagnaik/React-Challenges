@@ -18,8 +18,6 @@ export const dynamic = "force-static";
 // generateMetadata: Dynamic metadata can be generated for routes.
 // nextImage: Image is imported from next/image.
 // imageOptimization: Next.js optimizes the image.
-// nextImage: Image is imported from next/image.
-// imageOptimization: Next.js optimizes the image.
 // nextFont: The application font is loaded and applied by the root layout.
 
 export const metadata: Metadata = {
